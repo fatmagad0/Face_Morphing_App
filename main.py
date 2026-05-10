@@ -7,8 +7,9 @@ import uuid
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
-UPLOAD_FOLDER = 'static/outputs'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+UPLOAD_FOLDER = os.path.join('static', 'outputs')
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 # Load Models
 detector = dlib.get_frontal_face_detector()
