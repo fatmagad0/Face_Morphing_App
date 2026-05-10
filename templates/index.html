@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Morphing App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Face Morpher</h1>
+        <p>Seamlessly blend two faces with AI power ✨</p>
+        
+        <div class="upload-section">
+            <div class="input-group">
+                <label>First Subject</label>
+                <input type="file" id="face1" accept="image/*">
+            </div>
+            <div class="input-group">
+                <label>Second Subject</label>
+                <input type="file" id="face2" accept="image/*">
+            </div>
+            <button onclick="startMorphing()" id="btn">Start Magic</button>
+        </div>
+
+        <div id="loader" class="hidden">Morphing in progress... ⚡</div>
+        
+        <div id="result-container">
+            <img id="outputGif" src="" alt="" style="display: none;">
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
