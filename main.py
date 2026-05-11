@@ -95,10 +95,24 @@ def morph():
         # h, w = min(img1.shape[0], img2.shape[0]), min(img1.shape[1], img2.shape[1])
         # img1, img2 = cv2.resize(img1, (w, h)), cv2.resize(img2, (w, h))
 
-        MAX_SIZE = 500 
-        h = min(img1.shape[0], img2.shape[0], MAX_SIZE)
-        w = min(img1.shape[1], img2.shape[1], MAX_SIZE)
+        # MAX_SIZE = 500 
+        # h = min(img1.shape[0], img2.shape[0], MAX_SIZE)
+        # w = min(img1.shape[1], img2.shape[1], MAX_SIZE)
         
+        # img1 = cv2.resize(img1, (w, h))
+        # img2 = cv2.resize(img2, (w, h))
+        h = min(img1.shape[0], img2.shape[0])
+        w = min(img1.shape[1], img2.shape[1])
+        
+        # 2. نصغر الأبعاد بنسبة وتناسب لو كانت كبيرة (عشان نحافظ على شكل الوش وميتمطش)
+        MAX_SIZE = 500
+        if h > MAX_SIZE or w > MAX_SIZE:
+            # نحسب نسبة التصغير بناءً على الضلع الأكبر
+            scale = MAX_SIZE / float(max(h, w))
+            h = int(h * scale)
+            w = int(w * scale)
+            
+        # 3. نعمل الـ Resize للأبعاد الجديدة
         img1 = cv2.resize(img1, (w, h))
         img2 = cv2.resize(img2, (w, h))
 
