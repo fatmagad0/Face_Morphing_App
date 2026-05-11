@@ -92,13 +92,20 @@ def morph():
         f1.save(p1); f2.save(p2)
 
         img1, img2 = cv2.imread(p1), cv2.imread(p2)
-        h, w = min(img1.shape[0], img2.shape[0]), min(img1.shape[1], img2.shape[1])
-        img1, img2 = cv2.resize(img1, (w, h)), cv2.resize(img2, (w, h))
+        # h, w = min(img1.shape[0], img2.shape[0]), min(img1.shape[1], img2.shape[1])
+        # img1, img2 = cv2.resize(img1, (w, h)), cv2.resize(img2, (w, h))
+
+        MAX_SIZE = 500 
+        h = min(img1.shape[0], img2.shape[0], MAX_SIZE)
+        w = min(img1.shape[1], img2.shape[1], MAX_SIZE)
+        
+        img1 = cv2.resize(img1, (w, h))
+        img2 = cv2.resize(img2, (w, h))
 
         pts1, pts2 = get_landmarks(img1), get_landmarks(img2)
         frames = []
-        for i in range(0, 21):
-            alpha = i / 20.0
+        for i in range(0, 15):
+            alpha = i / 14.0
             frame = generate_morph(img1, img2, pts1, pts2, alpha)
             frames.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         last_frame = frames[-1]
