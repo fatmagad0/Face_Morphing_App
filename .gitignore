@@ -2,4 +2,4 @@
 __pycache__/
 static/outputs/*.gif
 temp*.jpg
-shape_predictor_68_face_landmarks.dat
+# shape_predictor_68_face_landmarks.dat

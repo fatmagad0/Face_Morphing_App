@@ -101,10 +101,12 @@ def morph():
             alpha = i / 20.0
             frame = generate_morph(img1, img2, pts1, pts2, alpha)
             frames.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        
+        last_frame = frames[-1]
+        for _ in range(15):
+            frames.append(last_frame)
         output_filename = f"result_{unique_id}.gif"
         output_path = os.path.join(UPLOAD_FOLDER, output_filename)
-        imageio.mimsave(output_path, frames, fps=10)
+        imageio.mimsave(output_path, frames, fps=10,loop=0)
         
         os.remove(p1); os.remove(p2)
         return jsonify({"gif_url": f"/static/outputs/{output_filename}"})
